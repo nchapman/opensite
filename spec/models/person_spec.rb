@@ -30,7 +30,7 @@ describe Person do
   
   it "should validate presence of email" do 
     @person.attributes = @valid_attributes.except(:email)
-    @person.should have(2).error_on(:email)
+    @person.should have(1).error_on(:email)
   end
   
   it "should require a valid email" do
@@ -39,17 +39,62 @@ describe Person do
     
     @person.attributes = @valid_attributes.with(:email => "jsmith@examplecom")
     @person.should have(1).error_on(:email)
+    
+    @person.attributes = @valid_attributes.except(:email)
+    @person.should have(1).error_on(:email)
+    
+    @person.attributes = @valid_attributes.with(:email => "")
+    @person.should have(1).error_on(:email)
   end
   
   it "should require a unique email" do
     @another_person = Person.create!(@valid_attributes)
     @person.attributes = @valid_attributes
-    
     @person.should have(1).error_on(:email)
+  end
+  
+  it "should require a valid password" do
+    @person.attributes = @valid_attributes.with(:password => "pass", :password_confirmation => "pass")
+    @person.should have(1).error_on(:password)
   end
   
   it "should require password confirmation" do
     @person.attributes = @valid_attributes.with(:password_confirmation => "paZZword")
     @person.should have(1).error_on(:password)
+  end
+  
+  it "should flush passwords after save" do
+    @person.attributes = @valid_attributes
+    @person.save!
+    
+    @person.password.should == nil
+    @person.password_confirmation.should == nil
+  end
+  
+  it "should encrypt password" do
+    @person.attributes = @valid_attributes
+    @person.encrypted_password.should_not == nil
+    @person.encrypted_password.should_not == "password"
+    @person.salt.should_not == nil
+  end
+  
+  it "should not update the password if a blank one is provided" do
+    @person.attributes = @valid_attributes
+    @person.save
+    
+    encrypted_password = @person.encrypted_password
+    
+    @person.password = @person.password_confirmation = ""
+    
+    @person.should be_valid
+    @person.encrypted_password.should == encrypted_password
+  end
+  
+  it "should authenticate a user" do
+    @person.attributes = @valid_attributes
+    @person.save
+    
+    Person.authenticate("jsmith@example.com", "letmein").should == nil
+    Person.authenticate("jsmith@example.com", "password").should_not == nil
   end
 end
