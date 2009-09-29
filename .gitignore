@@ -4,3 +4,4 @@ doc/api
 doc/app
 *.esproj
 db/*.sqlite3
+.DS_Store
