@@ -1,0 +1,11 @@
+<h1>Editing page</h1>
+
+<% form_for([:admin, @site, @page]) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to "Show", [:admin, @site, @page] %> |
+<%= link_to "Back", admin_site_pages_path(@site) %>

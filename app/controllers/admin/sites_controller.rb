@@ -1,4 +1,6 @@
 class Admin::SitesController < ApplicationController
+  before_filter :require_user
+  
   # GET /admin/sites
   # GET /admin/sites.xml
   def index
