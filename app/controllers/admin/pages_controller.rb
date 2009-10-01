@@ -85,9 +85,4 @@ class Admin::PagesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
-  private
-    def get_site
-      @site = Site.find(params[:site_id])
-    end
 end

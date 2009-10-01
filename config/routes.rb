@@ -3,6 +3,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :users
     admin.resources :sites do |site|
       site.resources :pages
+      site.resources :templates
     end
   end
 

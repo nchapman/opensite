@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @_template.title %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @_template.body %>
+</p>
+
+
+<%= link_to "Edit", edit_admin_site_template_path(@site, @_template) %> |
+<%= link_to "Back", admin_site_templates_path %>

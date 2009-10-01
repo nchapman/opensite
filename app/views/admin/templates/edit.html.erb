@@ -1,0 +1,11 @@
+<h1>Editing template</h1>
+
+<% form_for([:admin, @site, @_template]) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to "Show", [:admin, @site, @_template] %> |
+<%= link_to "Back", admin_site_templates_path(@site) %>
