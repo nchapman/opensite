@@ -9,6 +9,7 @@ class Template < ActiveRecord::Base
   end
   
   def prepare_context(context)
+    context.globals.site = self.site
     context.define_tag "site", :for => self.site, :expose => [:name]
   end
   

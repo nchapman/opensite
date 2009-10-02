@@ -8,11 +8,12 @@ class Page < ActiveRecord::Base
     # This is only an example
     context.with do |c|
       c.define_tag "pages" do |tag|
+        tag.locals.pages = tag.globals.site.pages.all
         tag.expand
       end
       c.define_tag "pages:each" do |tag|
         content = ""
-        Page.all.each do |page|
+        tag.locals.pages.each do |page|
           tag.locals.page = page
           content << tag.expand
         end
