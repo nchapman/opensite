@@ -26,6 +26,16 @@ class Page < ActiveRecord::Base
   end
   
   def prepare_context(context)
+    context.globals.page = self
+    
     context.define_tag "page", :for => self, :expose => [ :title, :body, :slug ]
+    
+    context.define_tag "title" do |tag|
+      tag.globals.page.title
+    end
+    
+    context.define_tag "body" do |tag|
+      tag.globals.page.body
+    end
   end
 end
