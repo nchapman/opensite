@@ -6,7 +6,7 @@ site = Site.new(:name => "Open Site", :subdomain => "opensite")
 site.users << user
 site.save!
 
-site.templates.create!(:title => "Default", :body => <<-BODY
+site.templates.create!(:title => "Default", :created_by => user, :updated_by => user, :body => <<-BODY
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

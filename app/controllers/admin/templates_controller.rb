@@ -44,6 +44,7 @@ class Admin::TemplatesController < ApplicationController
   # POST /admin/sites/1/templates.xml
   def create
     @_template = @site.templates.new(params[:template])
+    @_template.created_by = @_template.updated_by = current_user
 
     respond_to do |format|
       if @_template.save
@@ -61,6 +62,7 @@ class Admin::TemplatesController < ApplicationController
   # PUT /admin/sites/1/templates/1.xml
   def update
     @_template = @site.templates.find(params[:id])
+    @_template.updated_by = current_user
 
     respond_to do |format|
       if @_template.update_attributes(params[:template])
