@@ -28,4 +28,4 @@ site.templates.create!(:title => "Default", :body => <<-BODY
 BODY
 )
 
-site.pages.create!(:title => "Welcome to Open Site", :slug => "home", :body => "We're so glad you stopped by.")
+site.pages.create!(:title => "Welcome to Open Site", :home => true, :slug => "home", :body => "We're so glad you stopped by.")
