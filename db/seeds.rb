@@ -1,12 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#   
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
+# The data can be loaded with the rake db:seed (or created alongside the db with db:setup).
 
-user = User.create!(:first_name => "System", :last_name => "Administrator", :email => "admin@example.com", :password => "admin", :password_confirmation => "admin")
+user = User.create!(:first_name => "System", :last_name => "Administrator", :email => "admin@opensizzle.com", :admin => true, :password => "admin", :password_confirmation => "admin")
 
 site = Site.new(:name => "Open Site", :subdomain => "opensite")
 site.users << user

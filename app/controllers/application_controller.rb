@@ -29,6 +29,14 @@ class ApplicationController < ActionController::Base
         return false
       end
     end
+    
+    def require_admin
+      require_user
+      unless current_user.admin?
+        flash[:error] = "Access denied"
+        redirect_to admin_dashboard_url
+      end
+    end
 
     def require_no_user
       if current_user
