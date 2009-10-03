@@ -1,4 +1,4 @@
-<h1>Editing site</h1>
+<% @page_title = "Editing site" %>
 
 <% form_for([:admin, @site]) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>

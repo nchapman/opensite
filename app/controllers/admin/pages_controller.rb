@@ -44,6 +44,7 @@ class Admin::PagesController < ApplicationController
   # POST /admin/sites/1/pages.xml
   def create
     @page = @site.pages.new(params[:page])
+    @page.created_by = @page.updated_by = current_user
 
     respond_to do |format|
       if @page.save
@@ -61,6 +62,7 @@ class Admin::PagesController < ApplicationController
   # PUT /admin/sites/1/pages/1.xml
   def update
     @page = @site.pages.find(params[:id])
+    @page.updated_by = current_user
 
     respond_to do |format|
       if @page.update_attributes(params[:page])

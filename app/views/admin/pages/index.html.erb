@@ -1,15 +1,16 @@
-<h1>Listing pages</h1>
+<% @page_title = "Listing pages" %>
 
 <table>
   <tr>
     <th>Title</th>
-    <th>Body</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Destroy</th>
   </tr>
 
 <% @pages.each do |page| %>
   <tr>
     <td><%=h page.title %></td>
-    <td><%=h page.body %></td>
     <td><%= link_to "Show", [:admin, @site, page] %></td>
     <td><%= link_to "Edit", edit_admin_site_page_path(@site, page) %></td>
     <td><%= link_to "Destroy", [:admin, @site, page], :confirm => "Are you sure?", :method => :delete %></td>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091003021510) do
+ActiveRecord::Schema.define(:version => 20091003054527) do
 
   create_table "memberships", :force => true do |t|
     t.integer  "site_id"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(:version => 20091003021510) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "home"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "sites", :force => true do |t|
