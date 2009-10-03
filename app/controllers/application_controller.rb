@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   
   protected
     def get_site
-      @site = Site.find(params[:site_id])
+      @site = current_user.sites.find(params[:site_id])
     end
 
   private

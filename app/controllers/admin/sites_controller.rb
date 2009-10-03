@@ -4,7 +4,7 @@ class Admin::SitesController < ApplicationController
   # GET /admin/sites
   # GET /admin/sites.xml
   def index
-    @sites = Site.all
+    @sites = current_user.sites
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class Admin::SitesController < ApplicationController
   # GET /admin/sites/1
   # GET /admin/sites/1.xml
   def show
-    @site = Site.find(params[:id])
+    @site = current_user.sites.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,13 +36,14 @@ class Admin::SitesController < ApplicationController
 
   # GET /admin/sites/1/edit
   def edit
-    @site = Site.find(params[:id])
+    @site = current_user.sites.find(params[:id])
   end
 
   # POST /admin/sites
   # POST /admin/sites.xml
   def create
     @site = Site.new(params[:site])
+    @site.users << current_user
 
     respond_to do |format|
       if @site.save
@@ -59,7 +60,7 @@ class Admin::SitesController < ApplicationController
   # PUT /admin/sites/1
   # PUT /admin/sites/1.xml
   def update
-    @site = Site.find(params[:id])
+    @site = current_user.sites.find(params[:id])
 
     respond_to do |format|
       if @site.update_attributes(params[:site])
@@ -76,7 +77,7 @@ class Admin::SitesController < ApplicationController
   # DELETE /admin/sites/1
   # DELETE /admin/sites/1.xml
   def destroy
-    @site = Site.find(params[:id])
+    @site = current_user.sites.find(params[:id])
     @site.destroy
 
     respond_to do |format|
