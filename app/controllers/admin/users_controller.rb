@@ -1,5 +1,4 @@
 class Admin::UsersController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_admin, :only => [:index, :show, :edit, :update]
 
   # GET /users
@@ -47,8 +46,16 @@ class Admin::UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        flash[:notice] = "User was successfully created."
-        format.html { redirect_to([:admin, @user]) }
+        
+        format.html {
+          if admin?
+            flash[:notice] = "User was successfully created."
+            redirect_to([:admin, @user])
+          else
+            flash[:notice] = "Your account was successfully created."
+            redirect_to(admin_dashboard_url)
+          end
+        }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }

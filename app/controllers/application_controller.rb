@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   filter_parameter_logging :password, :password_confirmation
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :logged_in?, :admin?
   
   protected
     def get_site
@@ -36,6 +36,14 @@ class ApplicationController < ActionController::Base
         flash[:error] = "Access denied."
         redirect_to admin_dashboard_url
       end
+    end
+    
+    def logged_in?
+      current_user != nil
+    end
+    
+    def admin?
+      logged_in? && current_user.admin?
     end
 
     def require_no_user

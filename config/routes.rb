@@ -10,6 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :user_sessions
   map.login "/login", :controller => "user_sessions", :action => "new"
   map.logout "/logout", :controller => "user_sessions", :action => "destroy"
+  map.register "/register", :controller => "admin/users", :action => "new"
   # There's got to be a better way...
   map.admin_dashboard "/admin", :controller => "admin/dashboard", :action => "index"
 
