@@ -1,6 +1,6 @@
 <% @page_title = "New site" %>
 
-<% form_for([:admin, @site]) do |f| %>
+<% form_for([:admin, setup_site(@site)]) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
     <%= f.submit "Create" %>

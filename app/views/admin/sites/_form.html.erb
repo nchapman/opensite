@@ -12,3 +12,12 @@
   <%= f.label :subdomain %><br />
   <%= f.text_field :subdomain %>
 </p>
+
+<div id="domains">
+  <label>Domains</label><br/>
+  <% f.fields_for :domains do |domains_form| %>
+    <%= render :partial => "domain", :locals => {:f => domains_form} %>
+  <% end %>
+</div>
+
+<p><%= link_to_new_nested_form "Add a domain", f, :domains %></p>

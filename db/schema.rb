@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091003055345) do
+ActiveRecord::Schema.define(:version => 20091005234131) do
+
+  create_table "domains", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "fqdn"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "memberships", :force => true do |t|
     t.integer  "site_id"

@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def show
-    @site = Site.find_by_subdomain!(request.subdomains.first)
+    @site = Site.find_by_domain!(request.host)
     
     if params[:path].nil?
       @page = @site.pages.find_by_home!(true)

@@ -1,0 +1,9 @@
+<div class="domain">
+<%= f.text_field :fqdn %>
+<% if f.object.new_record? %>
+	<%= link_to_function "clear", "this.up('.domain').remove()" %>
+<% else %>
+	<%= f.check_box "_delete" %>
+	<%= f.label "_delete", "Remove" %>
+<% end %>
+</div>
