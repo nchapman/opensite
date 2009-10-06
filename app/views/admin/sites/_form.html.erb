@@ -10,7 +10,7 @@
 </p>
 <p>
   <%= f.label :subdomain %><br />
-  <%= f.text_field :subdomain %>
+  <%= f.text_field :subdomain %>.<%= APP_CONFIG["host_domain"] %>
 </p>
 
 <div id="domains">

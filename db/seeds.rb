@@ -4,9 +4,8 @@ user = User.create!(:first_name => "System", :last_name => "Administrator", :ema
 
 site = Site.new(:name => "Open Site", :subdomain => "opensite")
 site.users << user
-site.domains << Domain.new(:fqdn => "dev.opensizzle.com")
-site.domains << Domain.new(:fqdn => "opensizzle.com")
-site.domains << Domain.new(:fqdn => "www.opensizzle.com")
+site.domains << Domain.new(:fqdn => "localhost")
+site.domains << Domain.new(:fqdn => APP_CONFIG["host_domain"])
 site.save!
 
 site.templates.create!(:title => "Default", :created_by => user, :updated_by => user, :body => <<-BODY

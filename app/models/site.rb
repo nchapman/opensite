@@ -17,7 +17,7 @@ class Site < ActiveRecord::Base
     if domain
       return domain.site
     elsif host =~ /([^\.]+)\.#{APP_CONFIG["host_domain"]}/
-      return Site.find_by_subdomain($1)
+      return Site.find_by_subdomain!($1)
     else
       raise "not found"
     end
