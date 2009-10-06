@@ -1,0 +1,8 @@
+development:
+  host_domain: dev.opensizzle.com
+
+test:
+  host_domain: test.opensizzle.com
+
+production:
+  host_domain: opensizzle.com
