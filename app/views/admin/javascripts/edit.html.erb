@@ -1,0 +1,11 @@
+<h1>Editing javascript</h1>
+
+<% form_for([:admin, @site, @javascript]) do |f| %>
+  <%= render :partial => "admin/textual_assets/form", :locals => { :f => f } %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to "Show", [:admin, @site, @javascript] %> |
+<%= link_to "Back", admin_site_javascripts_path(@site) %>

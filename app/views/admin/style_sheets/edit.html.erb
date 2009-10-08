@@ -1,0 +1,11 @@
+<h1>Editing style sheet</h1>
+
+<% form_for([:admin, @site, @style_sheet]) do |f| %>
+  <%= render :partial => "admin/textual_assets/form", :locals => { :f => f } %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to "Show", [:admin, @site, @style_sheet] %> |
+<%= link_to "Back", admin_site_style_sheets_path(@site) %>

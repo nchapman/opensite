@@ -1,0 +1,22 @@
+<h1>Listing style_sheets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Body</th>
+  </tr>
+
+<% @style_sheets.each do |style_sheet| %>
+  <tr>
+    <td><%=h style_sheet.name %></td>
+    <td><%=h style_sheet.body %></td>
+    <td><%= link_to "Show", [:admin, @site, style_sheet] %></td>
+    <td><%= link_to "Edit", edit_admin_site_style_sheet_path(@site, style_sheet) %></td>
+    <td><%= link_to "Destroy", [:admin, @site, style_sheet], :confirm => "Are you sure?", :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "New style sheet", new_admin_site_style_sheet_path(@site) %>

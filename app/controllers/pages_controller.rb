@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
-  def show
-    @site = Site.find_by_domain!(request.host)
-    
+  before_filter :get_site_by_host
+  
+  def show    
     if params[:path].nil?
       @page = @site.pages.find_by_home!(true)
     else

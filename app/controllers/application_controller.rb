@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
     def get_site
       @site = current_user.sites.find(params[:site_id])
     end
+    
+    def get_site_by_host
+      @site = Site.find_by_domain!(request.host)
+    end
 
   private
     def current_user_session
