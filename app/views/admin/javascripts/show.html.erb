@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @javascript.name %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @javascript.body %>
+</p>
+
+
+<%= link_to "Edit", edit_admin_site_javascript_path(@site, @javascript) %> |
+<%= link_to "Back", admin_site_javascripts_path(@site) %>

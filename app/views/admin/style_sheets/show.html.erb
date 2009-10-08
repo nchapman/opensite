@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @style_sheet.name %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%=h @style_sheet.body %>
+</p>
+
+
+<%= link_to "Edit", edit_admin_site_style_sheet_path(@site, @style_sheet) %> |
+<%= link_to "Back", admin_site_style_sheets_path(@site) %>

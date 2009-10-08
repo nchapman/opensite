@@ -5,8 +5,11 @@ class CreateTextualAssets < ActiveRecord::Migration
       t.belongs_to :site
       t.string :type
       t.string :content_type
+      t.string :slug
       t.text :body
       t.timestamps
+      
+      t.index [:site_id, :type, :slug]
     end
   end
 

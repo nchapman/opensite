@@ -4,6 +4,9 @@ class Site < ActiveRecord::Base
   has_many :memberships
   has_many :users, :through => :memberships
   has_many :domains
+  has_many :textual_assets
+  has_many :style_sheets
+  has_many :javascripts
   
   validates_presence_of :name
   validates_format_of :subdomain, :with => /^[a-z0-9]+$/, :on => :create, :message => "can only contain lowercase letters and numbers"

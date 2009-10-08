@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20091008030316) do
     t.integer  "site_id"
     t.string   "type"
     t.string   "content_type"
+    t.string   "slug"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
