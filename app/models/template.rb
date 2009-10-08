@@ -8,24 +8,29 @@ class Template < ActiveRecord::Base
   validates_presence_of :title, :body
   
   def self.prepare_global_context(context)
+    [Page, StyleSheet, Javascript].each do |o|
+      o.prepare_global_context(context)
+    end
   end
   
   def prepare_context(context)
     context.globals.site = self.site
+    context.globals.template = self
     context.define_tag "site", :for => self.site, :expose => [:name]
   end
   
   def parse(object)
-    context = Radius::Context.new
+    @context = Radius::Context.new
     
-    Template.prepare_global_context(context)
-    Page.prepare_global_context(context)
-    StyleSheet.prepare_global_context(context)
-    Javascript.prepare_global_context(context)
+    Template.prepare_global_context(@context)
     
-    self.prepare_context(context)
-    object.prepare_context(context)
+    self.prepare_context(@context)
+    object.prepare_context(@context)
     
-    return Radius::Parser.new(context, :tag_prefix => "os").parse(self.body)
+    return parse_text(self.body)
+  end
+  
+  def parse_text(text)
+    Radius::Parser.new(@context, :tag_prefix => "os").parse(text)
   end
 end

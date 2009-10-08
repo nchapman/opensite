@@ -8,12 +8,11 @@ class Page < ActiveRecord::Base
   
   def self.prepare_global_context(context)
     # This is only an example
-    context.with do |c|
-      c.define_tag "pages" do |tag|
+      context.define_tag "pages" do |tag|
         tag.locals.pages = tag.globals.site.pages.all
         tag.expand
       end
-      c.define_tag "pages:each" do |tag|
+      context.define_tag "pages:each" do |tag|
         content = ""
         tag.locals.pages.each do |page|
           tag.locals.page = page
@@ -21,23 +20,20 @@ class Page < ActiveRecord::Base
         end
         content
       end
-      c.define_tag "pages:each:title" do |tag|
+      context.define_tag "pages:each:title" do |tag|
         tag.locals.page.title
       end
-    end
   end
   
-  def prepare_context(context)
+  def prepare_context(context)    
     context.globals.page = self
-    
-    context.define_tag "page", :for => self, :expose => [ :title, :body, :slug ]
     
     context.define_tag "title" do |tag|
       tag.globals.page.title
     end
     
     context.define_tag "body" do |tag|
-      tag.globals.page.body
+      tag.globals.template.parse_text(tag.globals.page.body)
     end
   end
 end
