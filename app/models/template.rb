@@ -20,6 +20,8 @@ class Template < ActiveRecord::Base
     
     Template.prepare_global_context(context)
     Page.prepare_global_context(context)
+    StyleSheet.prepare_global_context(context)
+    Javascript.prepare_global_context(context)
     
     self.prepare_context(context)
     object.prepare_context(context)
