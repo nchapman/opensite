@@ -9,7 +9,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091008030316) do
+ActiveRecord::Schema.define(:version => 20091008223125) do
+
+  create_table "binary_assets", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "name"
+    t.string   "type"
+    t.string   "slug"
+    t.string   "asset_file_name"
+    t.string   "asset_content_type"
+    t.integer  "asset_file_size"
+    t.datetime "asset_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "domains", :force => true do |t|
     t.integer  "site_id"

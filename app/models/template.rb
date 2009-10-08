@@ -8,7 +8,7 @@ class Template < ActiveRecord::Base
   validates_presence_of :title, :body
   
   def self.prepare_global_context(context)
-    [Page, StyleSheet, Javascript].each do |o|
+    [Page, StyleSheet, Javascript, Image].each do |o|
       o.prepare_global_context(context)
     end
   end

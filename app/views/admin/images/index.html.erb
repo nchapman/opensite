@@ -1,0 +1,25 @@
+<h1>Listing images</h1>
+
+<table>
+  <tr>
+    <th>File</th>
+    <th>Name</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Destroy</th>
+  </tr>
+
+<% @images.each do |image| %>
+  <tr>
+    <td><img src="<%= image.asset.url(:thumb) %>" /></td>
+    <td><%=h image.name %></td>
+    <td><%= link_to "Show", [:admin, @site, image] %></td>
+    <td><%= link_to "Edit", edit_admin_site_image_path(@site, image) %></td>
+    <td><%= link_to "Destroy", [:admin, @site, image], :confirm => "Are you sure?", :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "New image", new_admin_site_image_path(@site) %>

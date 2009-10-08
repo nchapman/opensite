@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  
+
   map.namespace :admin do |admin|
     admin.resources :users
     admin.resources :sites do |site|
@@ -7,11 +7,13 @@ ActionController::Routing::Routes.draw do |map|
       site.resources :templates
       site.resources :javascripts
       site.resources :style_sheets
+      site.resources :images
     end
   end
 
   map.connect "assets/style_sheets/:slug.css", :controller => "style_sheets", :action => "show"
   map.connect "assets/javascripts/:slug.js", :controller => "javascripts", :action => "show"
+  map.connect "assets/images/:slug.:extension", :controller => "images", :action => "show"
 
   map.resources :user_sessions
   map.login "/login", :controller => "user_sessions", :action => "new"

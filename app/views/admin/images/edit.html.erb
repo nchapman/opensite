@@ -1,0 +1,11 @@
+<h1>Editing image</h1>
+
+<% form_for([:admin, @site, @image], :html => { :multipart => true }) do |f| %>
+  <%= render :partial => "admin/binary_assets/form", :locals => { :f => f } %>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to "Show", [:admin, @site, @image] %> |
+<%= link_to "Back", admin_site_images_path(@site) %>

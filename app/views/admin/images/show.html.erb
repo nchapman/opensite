@@ -1,0 +1,4 @@
+<h3><%= @image.name %></h3>
+<p><img src="<%= @image.asset.url %>" /></p>
+<%= link_to "Edit", edit_admin_site_image_path(@site, @image) %> |
+<%= link_to "Back", admin_site_images_path(@site) %>
