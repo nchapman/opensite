@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091009185146) do
+ActiveRecord::Schema.define(:version => 20091009224042) do
 
   create_table "binary_assets", :force => true do |t|
     t.integer  "site_id"
@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(:version => 20091009185146) do
     t.string   "name",        :null => false
     t.string   "description"
     t.string   "subdomain",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "snippets", :force => true do |t|
+    t.integer  "site_id"
+    t.string   "name"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

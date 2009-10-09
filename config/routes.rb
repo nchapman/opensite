@@ -1,5 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-
   map.namespace :admin do |admin|
     admin.resources :users
     admin.resources :sites do |site|
@@ -8,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
       site.resources :javascripts
       site.resources :style_sheets
       site.resources :images
+      site.resources :snippets
     end
   end
 

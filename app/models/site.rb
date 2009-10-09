@@ -4,6 +4,7 @@ class Site < ActiveRecord::Base
   has_many :javascripts, :dependent => :destroy
   has_many :memberships, :dependent => :destroy
   has_many :pages, :dependent => :destroy
+  has_many :snippets, :dependent => :destroy
   has_many :style_sheets, :dependent => :destroy
   has_many :templates, :dependent => :destroy
   has_many :textual_assets, :dependent => :destroy

@@ -5,8 +5,6 @@ class CreateSites < ActiveRecord::Migration
       t.string :description
       t.string :subdomain,    :null => false
       t.timestamps
-      
-      t.index :subdomain
     end
   end
 

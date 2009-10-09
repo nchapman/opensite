@@ -1,0 +1,23 @@
+<h1>Listing snippets</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Destroy</th>
+  </tr>
+
+<% @snippets.each do |snippet| %>
+  <tr>
+    <td><%=h snippet.name %></td>
+    <td><%= link_to "Show", [:admin, @site, snippet] %></td>
+    <td><%= link_to "Edit", edit_admin_site_snippet_path(@site, snippet) %></td>
+    <td><%= link_to "Destroy", [:admin, @site, snippet], :confirm => "Are you sure?", :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to "New snippet", new_admin_site_snippet_path(@site) %>

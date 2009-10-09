@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%=h @snippet.name %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%=h @snippet.content %>
+</p>
+
+
+<%= link_to "Edit", edit_admin_site_snippet_path(@site, @snippet) %> |
+<%= link_to "Back", admin_site_snippets_path(@site) %>

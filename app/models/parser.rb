@@ -7,7 +7,7 @@ class Parser
     @context.globals.site = site
     @context.globals.parser = self
     
-    [Page, PagePart, StyleSheet, Javascript, Image].each do |o|
+    [Page, PagePart, StyleSheet, Javascript, Image, Snippet].each do |o|
       o.prepare_global_context(@context)
     end
   end
