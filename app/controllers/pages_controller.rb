@@ -3,12 +3,13 @@ class PagesController < ApplicationController
   
   def show    
     if params[:path].nil?
-      @page = @site.pages.find_by_home!(true)
+      page = @site.pages.find_by_home!(true)
     else
-      @page = @site.pages.find_by_slug!(params[:path].first)
+      page = @site.pages.find_by_slug!(params[:path].first)
     end
     
-    @_template = @site.templates.all.first
-    render :text => @_template.parse(@page)
+    template = @site.templates.all.first
+    
+    render :text => Parser.new(@site).parse_with_template(page, template)
   end
 end

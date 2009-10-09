@@ -19,16 +19,5 @@ class Javascript < TextualAsset
     context.define_tag "javascript:link" do |tag|
       "<script src=\"/assets/javascripts/#{tag.attr["slug"]}.js\"></script>"
     end
-    
-    context.define_tag "javascript:inline" do |tag|
-      slug = tag.attr["slug"]
-      javascript = tag.globals.site.javascripts.find_by_slug(slug)
-      
-      <<-CONTENT
-<script type="text/javascript">
-#{javascript ? javascript.body : "// #{slug} not found."}
-</script>
-CONTENT
-    end
   end
 end

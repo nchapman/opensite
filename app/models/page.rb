@@ -33,7 +33,7 @@ class Page < ActiveRecord::Base
     end
     
     context.define_tag "body" do |tag|
-      tag.globals.template.parse_text(tag.globals.page.body)
+      tag.globals.parser.parse_text(tag.globals.page.body)
     end
   end
 end

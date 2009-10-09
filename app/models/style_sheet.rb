@@ -17,18 +17,7 @@ class StyleSheet < TextualAsset
     end
 
     context.define_tag "style_sheet:link" do |tag|
-      "<script src=\"/assets/style_sheets/#{tag.attr["slug"]}.js\"></script>"
-    end
-
-    context.define_tag "style_sheet:inline" do |tag|
-      slug = tag.attr["slug"]
-      style_sheet = tag.globals.site.style_sheets.find_by_slug(slug)
-
-      <<-CONTENT
-<style type="text/css">
-#{style_sheet ? style_sheet.body : "/* #{slug} not found. */"}
-</style>
-CONTENT
+      "<link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style_sheets/#{tag.attr["slug"]}.css\"/>"
     end
   end
 end
