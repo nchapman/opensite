@@ -6,7 +6,7 @@ class CreateTextualAssets < ActiveRecord::Migration
       t.string :type
       t.string :content_type
       t.string :slug
-      t.text :body
+      t.text :content
       t.timestamps
       
       t.index [:site_id, :type, :slug]

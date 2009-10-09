@@ -4,7 +4,6 @@ class CreateDomains < ActiveRecord::Migration
       t.belongs_to :site
       t.string :fqdn
       t.timestamps
-      
       t.index :fqdn
     end
   end

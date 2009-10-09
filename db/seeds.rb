@@ -8,7 +8,7 @@ site.domains << Domain.new(:fqdn => "localhost")
 site.domains << Domain.new(:fqdn => APP_CONFIG["host_domain"])
 site.save!
 
-site.templates.create!(:title => "Default", :created_by => user, :updated_by => user, :body => <<-BODY
+site.templates.create!(:name => "Default", :created_by => user, :updated_by => user, :content => <<-CONTENT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -21,7 +21,11 @@ site.templates.create!(:title => "Default", :created_by => user, :updated_by => 
     <p><os:body /></p>
   </body>
 </html>
-BODY
+CONTENT
 )
 
-site.pages.create!(:title => "Welcome to Open Site", :home => true, :slug => "home", :body => "We're so glad you stopped by.", :created_by => user, :updated_by => user)
+page = site.pages.new(:title => "Welcome to Open Site", :home => true, :slug => "home", :created_by => user, :updated_by => user)
+
+page.part(:body).content = "We're so glad you stopped by."
+
+page.save!

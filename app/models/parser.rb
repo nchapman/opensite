@@ -16,10 +16,10 @@ class Parser
     template.prepare_context(@context)
     object.prepare_context(@context)
     
-    parse_text(template.body)
+    parse_text(template.content)
   end
   
   def parse_text(text)
-    Radius::Parser.new(@context, :tag_prefix => "os").parse(text)
+    Radius::Parser.new(@context, :tag_prefix => "os").parse(text) if text
   end
 end

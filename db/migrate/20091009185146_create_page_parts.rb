@@ -3,7 +3,7 @@ class CreatePageParts < ActiveRecord::Migration
     create_table :page_parts do |t|
       t.belongs_to :page
       t.string :name
-      t.text :body
+      t.text :content
       t.timestamps
     end
   end

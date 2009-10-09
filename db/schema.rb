@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20091009185146) do
   create_table "page_parts", :force => true do |t|
     t.integer  "page_id"
     t.string   "name"
-    t.text     "body"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(:version => 20091009185146) do
     t.integer  "site_id"
     t.string   "title"
     t.string   "slug"
-    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "home"
@@ -68,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20091009185146) do
 
   create_table "templates", :force => true do |t|
     t.integer  "site_id"
-    t.string   "title"
-    t.text     "body"
+    t.string   "name"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "created_by_id"
@@ -82,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20091009185146) do
     t.string   "type"
     t.string   "content_type"
     t.string   "slug"
-    t.text     "body"
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

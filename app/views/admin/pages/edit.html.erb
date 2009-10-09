@@ -1,6 +1,6 @@
 <% @page_title = "Editing page" %>
 
-<% form_for([:admin, @site, setup_page(@page)]) do |f| %>
+<% form_for([:admin, @site, @page]) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p>
     <%= f.submit "Update" %>

@@ -3,13 +3,11 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Body</th>
   </tr>
 
 <% @javascripts.each do |javascript| %>
   <tr>
     <td><%=h javascript.name %></td>
-    <td><%=h javascript.body %></td>
     <td><%= link_to "Show", [:admin, @site, javascript] %></td>
     <td><%= link_to "Edit", edit_admin_site_javascript_path(@site, javascript) %></td>
     <td><%= link_to "Destroy", [:admin, @site, javascript], :confirm => "Are you sure?", :method => :delete %></td>

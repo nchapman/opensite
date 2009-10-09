@@ -4,8 +4,8 @@
   <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body %>
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
   </p>
   <% if f.object.new_record? %>
 	  <%= link_to_function "clear", "this.up('.part').remove()" %>

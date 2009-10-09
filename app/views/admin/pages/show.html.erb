@@ -8,7 +8,7 @@
 </p>
 <p>
   <strong>Body:</strong>
-  <%=h @page.body %>
+  <%=h @page.part(:body).content %>
 </p>
 
 <%= link_to "Edit", edit_admin_site_page_path(@site, @page) %> |

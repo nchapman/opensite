@@ -1,21 +1,27 @@
 class Image < BinaryAsset
+  def url
+    "/assets/images/#{image.slug}#{image.asset_extension}"
+  end
+
   def self.prepare_global_context(context)
     context.define_tag "image" do |tag|
       tag.expand
     end
     
-    context.define_tag "image:path" do |tag|
-      slug = tag.attr["slug"]
-      image = tag.globals.site.images.find_by_slug(slug)
+    # <os:image:url name="My Image" /> :: /assets/images/my_image.jpg
+    context.define_tag "image:url" do |tag|
+      name = tag.attr["name"]
+      image = tag.globals.site.images.find_by_slug(name)
       
-      "/assets/images/#{image.slug}#{image.asset_extension}"
+      image ? image.url : nil
     end
     
+    # <os:image:link name="My Image" /> :: <img src="/assets/images/my_image.jpg" alt="My Image" />
     context.define_tag "image:link" do |tag|
-      slug = tag.attr["slug"]
-      image = tag.globals.site.images.find_by_slug(slug)
+      name = tag.attr["name"]
+      image = tag.globals.site.images.find_by_slug(name)
       
-      "<img src=\"/assets/images/#{image.slug}#{image.asset_extension}\" alt=\"#{image.name}\" />"
+      image ? "<img src=\"#{image.url}\" alt=\"#{image.name}\" />" : nil
     end
   end
 end

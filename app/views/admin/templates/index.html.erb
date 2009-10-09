@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Title</th>
+    <th>Name</th>
     <th>Show</th>
     <th>Edit</th>
     <th>Destroy</th>
@@ -10,7 +10,7 @@
 
 <% @_templates.each do |template| %>
   <tr>
-    <td><%=h template.title %></td>
+    <td><%=h template.name %></td>
     <td><%= link_to "Show", [:admin, @site, template] %></td>
     <td><%= link_to "Edit", edit_admin_site_template_path(@site, template) %></td>
     <td><%= link_to "Destroy", [:admin, @site, template], :confirm => "Are you sure?", :method => :delete %></td>
