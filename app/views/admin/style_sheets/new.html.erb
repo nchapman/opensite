@@ -1,4 +1,4 @@
-<h1>New style sheet</h1>
+<% @page_title = "New style sheet" %>
 
 <% form_for([:admin, @site, @style_sheet]) do |f| %>
   <%= render :partial => "admin/textual_assets/form", :locals => { :f => f } %>

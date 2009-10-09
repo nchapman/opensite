@@ -1,4 +1,4 @@
-<h1>Editing image</h1>
+<% @page_title = "Editing image" %>
 
 <% form_for([:admin, @site, @image], :html => { :multipart => true }) do |f| %>
   <%= render :partial => "admin/binary_assets/form", :locals => { :f => f } %>
