@@ -1,12 +1,12 @@
 class Site < ActiveRecord::Base
-  has_many :domains
-  has_many :images
-  has_many :javascripts
-  has_many :memberships
-  has_many :pages
-  has_many :style_sheets
-  has_many :templates
-  has_many :textual_assets
+  has_many :domains, :dependent => :destroy
+  has_many :images, :dependent => :destroy
+  has_many :javascripts, :dependent => :destroy
+  has_many :memberships, :dependent => :destroy
+  has_many :pages, :dependent => :destroy
+  has_many :style_sheets, :dependent => :destroy
+  has_many :templates, :dependent => :destroy
+  has_many :textual_assets, :dependent => :destroy
   has_many :users, :through => :memberships
   
   validates_presence_of :name

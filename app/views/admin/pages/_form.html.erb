@@ -12,3 +12,11 @@
   <%= f.label :body %><br />
   <%= f.text_area :body %>
 </p>
+<h3>Parts</h3>
+<div id="parts">
+  <% f.fields_for :parts do |parts_form| %>
+    <%= render :partial => "part", :locals => {:f => parts_form} %>
+  <% end %>
+</div>
+
+<p><%= link_to_new_nested_form "Add a part", f, :parts %></p>

@@ -2,9 +2,12 @@ class Page < ActiveRecord::Base
   belongs_to :site
   belongs_to :created_by, :class_name => "User"
   belongs_to :updated_by, :class_name => "User"
+  has_many :parts, :class_name => "PagePart", :dependent => :destroy
   
   validates_presence_of :title
   validates_format_of :slug, :with => /^[a-z0-9_]+$/, :message => "can only contain lowercase letters, numbers, and underscores"
+  
+  accepts_nested_attributes_for :parts, :allow_destroy => true, :reject_if => proc { |p| p["name"].blank? && ["body"].blank? }
   
   def self.prepare_global_context(context)
     # This is only an example
