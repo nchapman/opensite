@@ -1,4 +1,4 @@
-<h1>Editing snippet</h1>
+<% @page_title = "Editing snippet" %>
 
 <% form_for([:admin, @site, @snippet]) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
