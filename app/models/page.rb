@@ -13,36 +13,34 @@ class Page < ActiveRecord::Base
   
   accepts_nested_attributes_for :parts, :allow_destroy => true, :reject_if => proc { |p| p["name"].blank? && ["content"].blank? }
   
-  def self.find_by_path(path, site)
-    path_parts = path
-
-    if path_parts.size == 1
-      return Page.find_by_slug_and_site_id(path_parts.first, site.id)
-    else
-      # would this be better as a series of self joins?
-      # mysql might perform better this way rather than a large join
-      
-      pages = Page.find_all_by_slug_and_site_id(path_parts.pop, site.id)
-
-      pages.each do |p|
-        p.ancestors.each_index do |i|
-          a = p.ancestors[i]
-          return p if path_parts.size == i + 1 && a.slug == path_parts[i]
-          break if a.slug != path_parts[i]
-        end
-      end
+  def self.find_by_path(path_parts, site)
+    path = "/#{path_parts.join("/")}/"
+    
+    pages = Page.find(:all, :conditions => {:slug => path_parts[-1], :site_id => site})
+    
+    pages.each do |page|
+      return page if page.url == path
     end
     
     return nil
   end
   
   def self.find_by_path!(path, site)
-    page = Page.find_by_path(path, site)
-    
-    if page
+    if page = Page.find_by_path(path, site)
       return page
     else
       raise "Page not found."
+    end
+  end
+  
+  def url
+    path = "/"
+    
+    if self.home?
+      return path
+    else
+      self.ancestors.each {|a| path << a.slug << "/"} unless self.root?
+      return path << self.slug << "/"
     end
   end
   

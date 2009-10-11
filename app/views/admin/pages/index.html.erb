@@ -23,7 +23,7 @@
   <tr>
     <td><%=h page.title %></td>
     <td><%= link_to "Children", admin_site_page_children_path(@site, page) %></td>
-    <td><%= link_to "Show", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page) %></td>
+    <td><a href="<%= page.url %>">Show</a><!--<%= link_to "Show", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page) %>--></td>
     <td><%= link_to "Edit", @parent_page ? edit_admin_site_page_child_path(@site, @parent_page, page) : edit_admin_site_page_path(@site, page) %></td>
     <td><%= link_to "Destroy", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page), :confirm => "Are you sure?", :method => :delete %></td>
   </tr>
