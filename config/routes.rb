@@ -2,7 +2,9 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :users
     admin.resources :sites do |site|
-      site.resources :pages
+      site.resources :pages do |pages|
+        pages.resources :children, :controller => "pages"
+      end
       site.resources :templates
       site.resources :javascripts
       site.resources :style_sheets

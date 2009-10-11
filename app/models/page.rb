@@ -1,8 +1,12 @@
 class Page < ActiveRecord::Base
+  attr_accessor :proposed_parent
+  
   belongs_to :site
   belongs_to :created_by, :class_name => "User"
   belongs_to :updated_by, :class_name => "User"
   has_many :parts, :class_name => "PagePart", :dependent => :destroy
+  
+  acts_as_nested_set
   
   validates_presence_of :title
   validates_uniqueness_of :title, :scope => [:site_id]

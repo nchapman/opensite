@@ -11,5 +11,5 @@
   <%=h @page.part(:body).content %>
 </p>
 
-<%= link_to "Edit", edit_admin_site_page_path(@site, @page) %> |
-<%= link_to "Back", admin_site_pages_path(@site) %>
+<%= link_to "Edit", @parent_page ? edit_admin_site_page_child_path(@site, @parent_page, @page) : edit_admin_site_page_path(@site, @page) %> |
+<%= link_to "Back", @parent_page ? admin_site_page_children_path(@site, @parent_page) : admin_site_pages_path(@site) %>

@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Title</th>
+    <th>Children</th>
     <th>Show</th>
     <th>Edit</th>
     <th>Destroy</th>
@@ -11,13 +12,18 @@
 <% @pages.each do |page| %>
   <tr>
     <td><%=h page.title %></td>
-    <td><%= link_to "Show", [:admin, @site, page] %></td>
-    <td><%= link_to "Edit", edit_admin_site_page_path(@site, page) %></td>
-    <td><%= link_to "Destroy", [:admin, @site, page], :confirm => "Are you sure?", :method => :delete %></td>
+    <td><%= link_to "Children", admin_site_page_children_path(@site, page) %></td>
+    <td><%= link_to "Show", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page) %></td>
+    <td><%= link_to "Edit", @parent_page ? edit_admin_site_page_child_path(@site, @parent_page, page) : edit_admin_site_page_path(@site, page) %></td>
+    <td><%= link_to "Destroy", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page), :confirm => "Are you sure?", :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to "New page", new_admin_site_page_path(@site) %>
+<% unless @parent_page %>
+  <%= link_to "New page", new_admin_site_page_path(@site) %>
+<% else %>
+  <%= link_to "New page", new_admin_site_page_child_path(@site, @parent_page) %>
+<% end %>
