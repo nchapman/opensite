@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     if params[:path].nil?
       page = @site.pages.find_by_home!(true)
     else
-      page = @site.pages.find_by_slug!(params[:path].first)
+      page = Page.find_by_path!(params[:path], @site)
     end
     
     template = @site.templates.all.first

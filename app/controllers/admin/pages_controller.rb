@@ -33,6 +33,7 @@ class Admin::PagesController < ApplicationController
   # GET /admin/sites/1/pages/new.xml
   def new
     @page = @site.pages.new
+    @page.parts << PagePart.new(:name => "body")
 
     respond_to do |format|
       format.html # new.html.erb

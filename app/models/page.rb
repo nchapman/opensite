@@ -1,6 +1,4 @@
 class Page < ActiveRecord::Base
-  attr_accessor :proposed_parent
-  
   belongs_to :site
   belongs_to :created_by, :class_name => "User"
   belongs_to :updated_by, :class_name => "User"
@@ -15,8 +13,35 @@ class Page < ActiveRecord::Base
   
   accepts_nested_attributes_for :parts, :allow_destroy => true, :reject_if => proc { |p| p["name"].blank? && ["content"].blank? }
   
-  def after_initialize
-    parts << PagePart.new(:name => "body") if new_record?
+  def self.find_by_path(path, site)
+    path_parts = path
+
+    if path_parts.size == 1
+      return Page.find_by_slug_and_site_id(path_parts.first, site.id)
+    else
+      # change this to use a single sql query.
+      pages = Page.find_all_by_slug_and_site_id(path_parts.pop, site.id)
+
+      pages.each do |p|
+        p.ancestors.each_index do |i|
+          a = p.ancestors[i]
+          return p if path_parts.size == i + 1 && a.slug == path_parts[i]
+          break if a.slug != path_parts[i]
+        end
+      end
+    end
+    
+    return nil
+  end
+  
+  def self.find_by_path!(path, site)
+    page = Page.find_by_path(path, site)
+    
+    if page
+      return page
+    else
+      raise "Page not found."
+    end
   end
   
   def part(name)
