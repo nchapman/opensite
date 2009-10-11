@@ -6,8 +6,9 @@ class PagePart < ActiveRecord::Base
   def self.prepare_global_context(context)
     # <os:content part="body" />
     context.define_tag "content" do |tag|
+      part_name = tag.attr["part"] || "body"
       page = tag.locals.page
-      part = page.part(tag.attr["part"]) if page
+      part = page.part(part_name) if page
         
       part ? tag.globals.parser.parse_text(part.content) : nil
     end

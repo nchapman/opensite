@@ -18,7 +18,7 @@ site.templates.create!(:name => "Default", :created_by => user, :updated_by => u
   </head>
   <body>
     <h1><os:title /></h1>
-    <p><os:body /></p>
+    <p><os:content /></p>
   </body>
 </html>
 CONTENT

@@ -13,20 +13,28 @@ class Page < ActiveRecord::Base
   
   accepts_nested_attributes_for :parts, :allow_destroy => true, :reject_if => proc { |p| p["name"].blank? && ["content"].blank? }
   
-  def self.find_by_path(path_parts, site)
-    path = "/#{path_parts.join("/")}/"
-    
-    pages = Page.find(:all, :conditions => {:slug => path_parts[-1], :site_id => site})
-    
-    pages.each do |page|
-      return page if page.url == path
+  def self.find_by_url(url, site)
+    # Normalize incoming URL
+    url = "/" if url.nil?
+    url = url.join("/") if url.instance_of?(Array)
+    url = "/#{url}/".gsub(/\/{2,}/, "/")
+    url_parts = url.gsub(/(^\/+)|(\/+$)/, "").split("/")
+
+    if url_parts.empty?
+      return site.pages.find_by_home(true)
+    else
+      pages = Page.find(:all, :conditions => {:slug => url_parts[-1], :site_id => site.id})
+      
+      pages.each do |page|
+        return page if page.url == url
+      end
     end
     
     return nil
   end
   
-  def self.find_by_path!(path, site)
-    if page = Page.find_by_path(path, site)
+  def self.find_by_url!(url, site)
+    if page = Page.find_by_url(url, site)
       return page
     else
       raise "Page not found."
@@ -34,13 +42,13 @@ class Page < ActiveRecord::Base
   end
   
   def url
-    path = "/"
+    to_return = "/"
     
     if self.home?
-      return path
+      return to_return
     else
-      self.ancestors.each {|a| path << a.slug << "/"} unless self.root?
-      return path << self.slug << "/"
+      self.ancestors.each {|a| to_return << a.slug << "/"} unless self.root?
+      return to_return << self.slug << "/"
     end
   end
   
@@ -53,21 +61,36 @@ class Page < ActiveRecord::Base
   end
   
   def self.prepare_global_context(context)
+    # <os:title />
+    context.define_tag "title" do |tag|
+      tag.locals.page.title
+    end
+    
+    # <os:find url="/whatever"></os:find>
+    context.define_tag "find" do |tag|
+      url = tag.attr["url"]
+      tag.locals.page = Page.find_by_url(url, tag.globals.site)
+      tag.expand
+    end
+    
+    # <os:children></os:children>
+    context.define_tag "children" do |tag|
+      tag.locals.pages = tag.locals.page.children
+      tag.expand
+    end
+    
+    # <os:children:each></os:children:each>
+    context.define_tag "children:each" do |tag|
+      content = ""
+      tag.locals.pages.each do |page|
+        tag.locals.page = page
+        content << tag.expand
+      end
+      content
+    end
   end
   
   def prepare_context(context)    
     context.globals.page = self
-    
-    # <os:title />
-    context.define_tag "title" do |tag|
-      tag.globals.page.title
-    end
-    
-    # <os:body />
-    context.define_tag "body" do |tag|
-      page = tag.globals.page
-      part = page.part(:body)
-      part ? tag.globals.parser.parse_text(part.content) : nil
-    end
   end
 end
