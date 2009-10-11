@@ -19,7 +19,9 @@ class Page < ActiveRecord::Base
     if path_parts.size == 1
       return Page.find_by_slug_and_site_id(path_parts.first, site.id)
     else
-      # change this to use a single sql query.
+      # would this be better as a series of self joins?
+      # mysql might perform better this way rather than a large join
+      
       pages = Page.find_all_by_slug_and_site_id(path_parts.pop, site.id)
 
       pages.each do |p|

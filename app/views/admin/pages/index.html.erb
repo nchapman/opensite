@@ -1,5 +1,15 @@
 <% @page_title = "Listing pages" %>
 
+<% if @parent_page %>
+<p>
+  <%= link_to "Pages", admin_site_pages_path(@site) %> &#187;
+  <% @parent_page.ancestors.each do |ancestor| %>
+    <%= link_to ancestor.title, admin_site_page_children_path(@site, ancestor) %> &#187;
+  <% end %>
+  <strong><%=h @parent_page.title %></strong>
+</p>
+<% end %>
+
 <table>
   <tr>
     <th>Title</th>

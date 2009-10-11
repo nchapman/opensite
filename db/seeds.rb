@@ -26,6 +26,6 @@ CONTENT
 
 page = site.pages.new(:title => "Welcome to Open Site", :home => true, :slug => "home", :created_by => user, :updated_by => user)
 
-page.part(:body).content = "We're so glad you stopped by."
+page.parts << PagePart.new(:name => "body", :content => "We're so glad you stopped by.")
 
 page.save!
