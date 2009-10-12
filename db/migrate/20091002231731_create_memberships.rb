@@ -4,6 +4,7 @@ class CreateMemberships < ActiveRecord::Migration
       t.belongs_to :site
       t.belongs_to :user
       t.timestamps
+      t.index [:user, :site]
     end
   end
 

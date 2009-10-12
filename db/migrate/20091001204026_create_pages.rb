@@ -5,6 +5,9 @@ class CreatePages < ActiveRecord::Migration
       t.string :title
       t.string :slug
       t.timestamps
+      
+      t.index :site_id
+      t.index [:site_id, :slug]
     end
   end
 

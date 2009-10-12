@@ -5,6 +5,8 @@ class CreatePageParts < ActiveRecord::Migration
       t.string :name
       t.text :content
       t.timestamps
+      t.index :page_id
+      t.index [:page_id, :name]
     end
   end
 

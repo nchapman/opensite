@@ -58,8 +58,11 @@ ActiveRecord::Schema.define(:version => 20091010213403) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.string   "path"
   end
+
+  add_index "pages", ["lft", "rgt"], :name => "index_pages_on_lft_and_rgt"
+  add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
+  add_index "pages", ["site_id", "home"], :name => "index_pages_on_site_id_and_home"
 
   create_table "sites", :force => true do |t|
     t.string   "name",        :null => false

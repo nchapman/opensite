@@ -23,3 +23,9 @@ class Parser
     Radius::Parser.new(@context, :tag_prefix => "os").parse(text) if text
   end
 end
+
+class Radius::TagBinding
+  def parse(text)
+    self.globals.parser.parse_text(text)
+  end
+end

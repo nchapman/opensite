@@ -66,6 +66,20 @@ class Page < ActiveRecord::Base
       tag.locals.page.title
     end
     
+    # <os:slug />
+    context.define_tag "slug" do |tag|
+      tag.locals.page.slug
+    end
+    
+    # <os:link /> or <os:link>Text for Link</os:link>
+    context.define_tag "link" do |tag|
+      page = tag.locals.page
+      
+      text = tag.double? ? tag.expand : page.title
+      
+      %Q{<a href="#{page.url}">#{text}</a>}
+    end
+    
     # <os:find url="/whatever"></os:find>
     context.define_tag "find" do |tag|
       url = tag.attr["url"]
