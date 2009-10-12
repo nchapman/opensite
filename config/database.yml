@@ -16,7 +16,7 @@ test:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: opensite_production
+  database: opensite_test
   pool: 5
   username: root
   password:

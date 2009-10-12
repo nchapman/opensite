@@ -5,9 +5,10 @@ class CreatePageParts < ActiveRecord::Migration
       t.string :name
       t.text :content
       t.timestamps
-      t.index :page_id
-      t.index [:page_id, :name]
     end
+    
+    add_index :page_parts, :page_id
+    add_index :page_parts, [:page_id, :name]
   end
 
   def self.down

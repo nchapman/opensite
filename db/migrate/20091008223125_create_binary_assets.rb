@@ -10,9 +10,10 @@ class CreateBinaryAssets < ActiveRecord::Migration
       t.integer :asset_file_size
       t.datetime :asset_updated_at
       t.timestamps
-      t.index :site_id
-      t.index [:site_id, :slug]
     end
+    
+    add_index :binary_assets, :site_id
+    add_index :binary_assets, [:site_id, :slug]
   end
 
   def self.down

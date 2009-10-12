@@ -9,6 +9,9 @@ class CreateTemplates < ActiveRecord::Migration
       t.index :site_id
       t.index [:site_id, :name]
     end
+    
+    add_index :templates, :site_id
+    add_index :templates, [:site_id, :name]
   end
 
   def self.down

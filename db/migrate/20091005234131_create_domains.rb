@@ -4,8 +4,9 @@ class CreateDomains < ActiveRecord::Migration
       t.belongs_to :site
       t.string :fqdn
       t.timestamps
-      t.index :fqdn
     end
+    
+    add_index :domains, :fqdn
   end
 
   def self.down

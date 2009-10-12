@@ -5,10 +5,10 @@ class CreatePages < ActiveRecord::Migration
       t.string :title
       t.string :slug
       t.timestamps
-      
-      t.index :site_id
-      t.index [:site_id, :slug]
     end
+    
+    add_index :pages, :site_id
+    add_index :pages, [:site_id, :slug]
   end
 
   def self.down

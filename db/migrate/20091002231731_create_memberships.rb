@@ -4,8 +4,9 @@ class CreateMemberships < ActiveRecord::Migration
       t.belongs_to :site
       t.belongs_to :user
       t.timestamps
-      t.index [:user, :site]
     end
+    
+    add_index :memberships, [:user_id, :site_id]
   end
 
   def self.down

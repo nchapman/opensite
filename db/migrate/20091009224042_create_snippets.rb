@@ -5,9 +5,10 @@ class CreateSnippets < ActiveRecord::Migration
       t.string :name
       t.text :content
       t.timestamps
-      t.index :site_id
-      t.index [:site_id, :name]
     end
+    
+    add_index :snippets, :site_id
+    add_index :snippets, [:site_id, :name]
   end
 
   def self.down
