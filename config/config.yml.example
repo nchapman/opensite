@@ -10,8 +10,7 @@ test:
   mem_cache:
     enabled: false
     servers:
-      - server1
-      - server2
+      - 0.0.0.0:11211
 
 production:
   host_domain: opensizzle.com
