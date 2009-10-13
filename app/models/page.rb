@@ -41,6 +41,10 @@ class Page < ActiveRecord::Base
     end
   end
   
+  def cache_key
+    "page:#{self.id}"
+  end
+  
   def url
     to_return = "/"
     
