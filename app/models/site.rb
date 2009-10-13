@@ -16,6 +16,10 @@ class Site < ActiveRecord::Base
   
   accepts_nested_attributes_for :domains, :allow_destroy => true, :reject_if => proc { |d| d["fqdn"].blank? }
   
+  def cache_key
+    "site:#{self.id}"
+  end
+  
   def self.find_by_domain!(host)
     domain = Domain.find_by_fqdn(host, :include => [:site])
     

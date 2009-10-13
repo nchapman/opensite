@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     
     def get_site_by_host
       @site = Site.find_by_domain!(request.host)
+      @cache = Cache.new(@site)
     end
     
   private
