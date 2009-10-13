@@ -1,0 +1,21 @@
+development:
+  host_domain: dev.opensizzle.com
+  mem_cache:
+    enabled: false
+    servers:
+      - 0.0.0.0:11211
+
+test:
+  host_domain: test.opensizzle.com
+  mem_cache:
+    enabled: false
+    servers:
+      - server1
+      - server2
+
+production:
+  host_domain: opensizzle.com
+  mem_cache:
+    enabled: true
+    servers:
+      - 0.0.0.0:11211

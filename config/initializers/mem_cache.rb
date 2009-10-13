@@ -1,3 +1,5 @@
 require "memcache"
 
-MEM_CACHE = MemCache.new("0.0.0.0:11211", :namespace => "os:")
+if APP_CONFIG[:mem_cache][:enabled]
+  MEM_CACHE = MemCache.new(APP_CONFIG[:mem_cache][:servers])
+end
