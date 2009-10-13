@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def show
-    content = cache_get_by_url
+    content = Cache.get_by_url(request.url)
     
     unless content
       get_site_by_host
@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       
       content = Parser.new(@site).parse_with_template(page, template)
       
-      cache_add(page.cache_key, content)
+      Cache.add(page.cache_key, request.url, content)
     end
     
     render :text => content

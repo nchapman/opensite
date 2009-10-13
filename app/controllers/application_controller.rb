@@ -14,24 +14,6 @@ class ApplicationController < ActionController::Base
       @site = Site.find_by_domain!(request.host)
     end
     
-    def cache_get(key)
-      MEM_CACHE[MEM_CACHE[key]]
-    end
-    
-    def cache_get_by_url(url = request.host + request.request_uri)
-      MEM_CACHE[url]
-    end
-    
-    def cache_add(key, content, url = request.host + request.request_uri)
-      MEM_CACHE[key] = url
-      MEM_CACHE[url] = content
-    end
-    
-    def cache_delete(key)
-      MEM_CACHE.delete(MEM_CACHE[key])
-      MEM_CACHE.delete(key)
-    end
-
   private
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
