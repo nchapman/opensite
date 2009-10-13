@@ -8,7 +8,7 @@ class Cache
   def add(key, value)
     if @@enabled
       set_site_keys(get_site_keys << key)
-      MEM_CACHE.add(key, value)
+      MEM_CACHE.add(key, value.to_s, 0, true)
     end
   end
   
