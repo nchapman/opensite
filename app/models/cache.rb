@@ -17,7 +17,7 @@ class Cache
   end
   
   def self.get(key)
-    MEM_CACHE.get(key) if @@enabled
+    MEM_CACHE.get(key, true) if @@enabled
   end
   
   def delete(key)

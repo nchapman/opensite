@@ -1,10 +1,17 @@
 class JavascriptsController < ApplicationController
-  before_filter :get_site_by_host
-  
   def show
-    javascript = @site.javascripts.find_by_slug!(params[:slug])
-    parser = Parser.new(@site)
+    content = Cache.get(request.url)
     
-    render :text => parser.parse_text(javascript.body), :content_type => javascript.content_type
+    unless content
+      get_site_by_host
+      
+      javascript = @site.javascripts.find_by_slug!(params[:slug])
+      
+      content = Parser.new(@site).parse_text(javascript.content)
+      
+      @cache.add(request.url, content)
+    end
+    
+    render :text => content, :content_type => "text/javascript"
   end
 end
