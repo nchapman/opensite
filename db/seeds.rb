@@ -7,25 +7,3 @@ site.users << user
 site.domains << Domain.new(:fqdn => "localhost")
 site.domains << Domain.new(:fqdn => APP_CONFIG["host_domain"])
 site.save!
-
-site.templates.create!(:name => "Default", :created_by => user, :updated_by => user, :content => <<-CONTENT
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title><os:title /></title>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&2.8.0r4/build/base/base-min.css" />
-  </head>
-  <body>
-    <h1><os:title /></h1>
-    <p><os:content /></p>
-  </body>
-</html>
-CONTENT
-)
-
-page = site.pages.new(:title => "Welcome to Open Site", :home => true, :slug => "home", :created_by => user, :updated_by => user)
-
-page.parts << PagePart.new(:name => "body", :content => "We're so glad you stopped by.")
-
-page.save!

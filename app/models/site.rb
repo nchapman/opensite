@@ -18,6 +18,34 @@ class Site < ActiveRecord::Base
   
   accepts_nested_attributes_for :domains, :allow_destroy => true, :reject_if => proc { |d| d["fqdn"].blank? }
   
+  def after_create
+    self.templates.create!(:name => "Default", :created_by => self.created_by, :updated_by => self.updated_by, :content => <<-CONTENT
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+      <head>
+        <title><os:title /></title>
+        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&2.8.0r4/build/base/base-min.css" />
+      </head>
+      <body>
+        <h1><os:title /></h1>
+        <p><os:content /></p>
+      </body>
+    </html>
+    CONTENT
+    )
+
+    page = self.pages.new(:title => "Welcome!", :home => true, :slug => "home", :created_by => self.created_by, :updated_by => self.updated_by)
+
+    page.parts << PagePart.new(:name => "body", :content => "We're so glad you stopped by.")
+
+    page.save!
+  end
+  
+  def url
+    "http://#{self.subdomain}.#{APP_CONFIG[:host_domain]}"
+  end
+  
   def cache_key
     "site:#{self.id}"
   end
@@ -27,7 +55,7 @@ class Site < ActiveRecord::Base
     
     if domain
       return domain.site
-    elsif host =~ /([^\.]+)\.#{APP_CONFIG["host_domain"]}/
+    elsif host =~ /([^\.]+)\.#{APP_CONFIG[:host_domain]}/
       return Site.find_by_subdomain!($1)
     else
       raise "not found"
