@@ -44,6 +44,8 @@ class Admin::SitesController < ApplicationController
   def create
     @site = Site.new(params[:site])
     @site.users << current_user
+    
+    @site.created_by = @site.updated_by = current_user
 
     respond_to do |format|
       if @site.save
@@ -61,6 +63,7 @@ class Admin::SitesController < ApplicationController
   # PUT /admin/sites/1.xml
   def update
     @site = current_user.sites.find(params[:id])
+    @site.updated_by = current_user
 
     respond_to do |format|
       if @site.update_attributes(params[:site])

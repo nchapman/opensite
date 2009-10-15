@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091010213403) do
+ActiveRecord::Schema.define(:version => 20091015055436) do
 
   create_table "binary_assets", :force => true do |t|
     t.integer  "site_id"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(:version => 20091010213403) do
     t.datetime "asset_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   add_index "binary_assets", ["site_id", "slug"], :name => "index_binary_assets_on_site_id_and_slug"
@@ -77,11 +79,13 @@ ActiveRecord::Schema.define(:version => 20091010213403) do
   add_index "pages", ["site_id"], :name => "index_pages_on_site_id"
 
   create_table "sites", :force => true do |t|
-    t.string   "name",        :null => false
+    t.string   "name",          :null => false
     t.string   "description"
-    t.string   "subdomain",   :null => false
+    t.string   "subdomain",     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   add_index "sites", ["subdomain"], :name => "index_sites_on_subdomain"
@@ -119,6 +123,8 @@ ActiveRecord::Schema.define(:version => 20091010213403) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   add_index "textual_assets", ["site_id", "slug"], :name => "index_textual_assets_on_site_id_and_slug"
@@ -143,6 +149,8 @@ ActiveRecord::Schema.define(:version => 20091010213403) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
 end

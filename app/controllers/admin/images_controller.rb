@@ -44,6 +44,7 @@ class Admin::ImagesController < ApplicationController
   # POST /admin/sites/1/images.xml
   def create
     @image = @site.images.new(params[:image])
+    @image.created_by = @image.updated_by = current_user
 
     respond_to do |format|
       if @image.save
@@ -61,6 +62,7 @@ class Admin::ImagesController < ApplicationController
   # PUT /admin/sites/1/images/1.xml
   def update
     @image = @site.images.find(params[:id])
+    @image.updated_by = current_user
 
     respond_to do |format|
       if @image.update_attributes(params[:image])

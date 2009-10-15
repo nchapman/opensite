@@ -44,6 +44,7 @@ class Admin::StyleSheetsController < ApplicationController
   # POST /admin/sites/1/style_sheets.xml
   def create
     @style_sheet = @site.style_sheets.new(params[:style_sheet])
+    @style_sheet.created_by = @style_sheet.updated_by = current_user
 
     respond_to do |format|
       if @style_sheet.save
@@ -61,6 +62,7 @@ class Admin::StyleSheetsController < ApplicationController
   # PUT /admin/sites/1/style_sheets/1.xml
   def update
     @style_sheet = @site.style_sheets.find(params[:id])
+    @style_sheet.updated_by = current_user
 
     respond_to do |format|
       if @style_sheet.update_attributes(params[:style_sheet])

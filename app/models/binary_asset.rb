@@ -1,5 +1,7 @@
 class BinaryAsset < ActiveRecord::Base
   belongs_to :site
+  belongs_to :created_by, :class_name => "User"
+  belongs_to :updated_by, :class_name => "User"
   
   has_attached_file :asset, :styles => { :thumb => "100x100>" }
   

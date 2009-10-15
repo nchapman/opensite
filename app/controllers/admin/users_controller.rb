@@ -43,6 +43,7 @@ class Admin::UsersController < ApplicationController
   # POST /admin/users.xml
   def create
     @user = User.new(params[:user])
+    @user.created_by = @user.updated_by = current_user
 
     respond_to do |format|
       if @user.save
@@ -68,6 +69,7 @@ class Admin::UsersController < ApplicationController
   # PUT /admin/users/1.xml
   def update
     @user = User.find(params[:id])
+    @user.updated_by = current_user
 
     respond_to do |format|
       if @user.update_attributes(params[:user])

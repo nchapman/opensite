@@ -2,15 +2,16 @@
 
 <table>
   <tr>
-    <th>First name</th>
-    <th>Last name</th>
+    <th>Name</th>
     <th>Email</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Destroy</th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><%=h user.first_name %></td>
-    <td><%=h user.last_name %></td>
+    <td><%=h user.full_name %></td>
     <td><%=h user.email %></td>
     <td><%= link_to "Show", [:admin, user] %></td>
     <td><%= link_to "Edit", edit_admin_user_path(user) %></td>

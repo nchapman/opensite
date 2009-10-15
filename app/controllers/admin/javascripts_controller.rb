@@ -44,7 +44,8 @@ class Admin::JavascriptsController < ApplicationController
   # POST /admin/sites/1/javascripts.xml
   def create
     @javascript = @site.javascripts.new(params[:javascript])
-
+    @javascript.created_by = @javascript.updated_by = current_user
+    
     respond_to do |format|
       if @javascript.save
         flash[:notice] = "Javascript was successfully created."
@@ -61,6 +62,7 @@ class Admin::JavascriptsController < ApplicationController
   # PUT /admin/sites/1/javascripts/1.xml
   def update
     @javascript = @site.javascripts.find(params[:id])
+    @javascript.updated_by = current_user
 
     respond_to do |format|
       if @javascript.update_attributes(params[:javascript])
