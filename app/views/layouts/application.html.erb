@@ -9,6 +9,13 @@
   </head>
   <body>
     <h1>Site Administration</h1>
+    <ul>
+      <li><strong><%= link_to "Dashboard", admin_dashboard_path %></strong></li>
+      <li><%= link_to "Sites", admin_sites_path %></li>
+      <% if admin? %>
+      <li><%= link_to "Users", admin_users_path %></li>
+      <% end %>
+    </ul>
     <% if flash[:notice] %><p style="color: green"><%= flash[:notice] %></p><% end %>
     <% if flash[:error] %><p style="color: red"><%= flash[:error] %></p><% end %>
     <h2><%= @page_title %></h2>
