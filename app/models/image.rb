@@ -1,4 +1,6 @@
 class Image < BinaryAsset
+  validates_attachment_content_type :asset, :content_type => ["image/jpeg", "image/gif", "image/png"]
+  
   def url
     "/assets/images/#{image.slug}#{image.asset_extension}"
   end
