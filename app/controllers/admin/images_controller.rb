@@ -1,6 +1,7 @@
 class Admin::ImagesController < ApplicationController
   before_filter :require_user
   before_filter :get_site
+  layout "site"
   
   # GET /admin/sites/1/images
   # GET /admin/sites/1/images.xml

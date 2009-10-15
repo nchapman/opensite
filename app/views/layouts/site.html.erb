@@ -8,7 +8,18 @@
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts/reset-fonts.css&2.8.0r4/build/base/base-min.css" />
   </head>
   <body>
-    <h1>Site Administration</h1>
+    <h1><%=h @site.name %></h1>
+    <ul>
+      <li><strong><%= link_to "Dashboard", admin_dashboard_path %></strong></li>
+      <li><%= link_to "Pages", admin_site_pages_path(@site) %></li>
+      <li><%= link_to "Snippets", admin_site_snippets_path(@site) %></li>
+    </ul>
+    <ul>
+      <li><%= link_to "Templates", admin_site_templates_path(@site) %></li>
+      <li><%= link_to "Style Sheets", admin_site_style_sheets_path(@site) %></li>
+      <li><%= link_to "JavaScripts", admin_site_javascripts_path(@site) %></li>
+      <li><%= link_to "Images", admin_site_images_path(@site) %></li>
+    </ul>
     <% if flash[:notice] %><p style="color: green"><%= flash[:notice] %></p><% end %>
     <% if flash[:error] %><p style="color: red"><%= flash[:error] %></p><% end %>
     <h2><%= @page_title %></h2>

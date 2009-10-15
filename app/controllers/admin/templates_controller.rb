@@ -1,6 +1,7 @@
 class Admin::TemplatesController < ApplicationController
   before_filter :require_user
   before_filter :get_site
+  layout "site"
   
   # GET /admin/sites/1/templates
   # GET /admin/sites/1/templates.xml

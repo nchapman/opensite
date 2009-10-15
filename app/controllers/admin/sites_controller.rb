@@ -1,5 +1,6 @@
 class Admin::SitesController < ApplicationController
   before_filter :require_user
+  layout "application"
   
   # GET /admin/sites
   # GET /admin/sites.xml

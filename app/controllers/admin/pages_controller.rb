@@ -2,6 +2,7 @@ class Admin::PagesController < ApplicationController
   before_filter :require_user
   before_filter :get_site
   before_filter :get_parent_page
+  layout "site"
   
   # GET /admin/sites/1/pages
   # GET /admin/sites/1/pages.xml

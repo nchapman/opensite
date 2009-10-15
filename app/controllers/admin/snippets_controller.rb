@@ -1,6 +1,7 @@
 class Admin::SnippetsController < ApplicationController
   before_filter :require_user
   before_filter :get_site
+  layout "site"
   
   # GET /admin/sites/1/snippets
   # GET /admin/sites/1/snippets.xml

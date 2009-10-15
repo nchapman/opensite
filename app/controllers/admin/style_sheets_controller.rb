@@ -1,6 +1,7 @@
 class Admin::StyleSheetsController < ApplicationController
   before_filter :require_user
   before_filter :get_site
+  layout "site"
   
   # GET /admin/sites/1/style_sheets
   # GET /admin/sites/1/style_sheets.xml
