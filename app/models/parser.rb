@@ -13,6 +13,9 @@ class Parser
   end
   
   def parse_with_template(object, template)
+    site = template.site
+    
+    site.prepare_context(@context)
     template.prepare_context(@context)
     object.prepare_context(@context)
     

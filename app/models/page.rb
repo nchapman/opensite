@@ -7,8 +7,8 @@ class Page < ActiveRecord::Base
   acts_as_nested_set
   
   validates_presence_of :title
-  validates_uniqueness_of :title, :scope => [:site_id]
-  validates_uniqueness_of :slug, :scope => [:site_id]
+  validates_uniqueness_of :title, :scope => [:site_id, :parent_id]
+  validates_uniqueness_of :slug, :scope => [:site_id, :parent_id]
   validates_format_of :slug, :with => /^[a-z0-9_]+$/, :message => "can only contain lowercase letters, numbers, and underscores"
   
   accepts_nested_attributes_for :parts, :allow_destroy => true, :reject_if => proc { |p| p["name"].blank? && ["content"].blank? }

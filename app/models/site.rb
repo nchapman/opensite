@@ -18,6 +18,26 @@ class Site < ActiveRecord::Base
   
   accepts_nested_attributes_for :domains, :allow_destroy => true, :reject_if => proc { |d| d["fqdn"].blank? }
   
+  def url
+    "http://#{self.subdomain}.#{APP_CONFIG[:host_domain]}"
+  end
+  
+  def cache_key
+    "site:#{self.id}"
+  end
+  
+  def self.find_by_domain!(host)
+    domain = Domain.find_by_fqdn(host, :include => [:site])
+    
+    if domain
+      return domain.site
+    elsif host =~ /([^\.]+)\.#{APP_CONFIG[:host_domain]}/
+      return Site.find_by_subdomain!($1)
+    else
+      raise "not found"
+    end
+  end
+  
   def after_create
     self.templates.create!(:name => "Default", :created_by => self.created_by, :updated_by => self.updated_by, :content => <<-CONTENT
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -42,23 +62,9 @@ class Site < ActiveRecord::Base
     page.save!
   end
   
-  def url
-    "http://#{self.subdomain}.#{APP_CONFIG[:host_domain]}"
-  end
-  
-  def cache_key
-    "site:#{self.id}"
-  end
-  
-  def self.find_by_domain!(host)
-    domain = Domain.find_by_fqdn(host, :include => [:site])
+  def prepare_context(context)
+    context.globals.site = self
     
-    if domain
-      return domain.site
-    elsif host =~ /([^\.]+)\.#{APP_CONFIG[:host_domain]}/
-      return Site.find_by_subdomain!($1)
-    else
-      raise "not found"
-    end
+    context.define_tag "site", :for => self, :expose => [:name]
   end
 end
