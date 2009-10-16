@@ -2,6 +2,7 @@ class Admin::PagesController < ApplicationController
   before_filter :require_user
   before_filter :get_site
   before_filter :get_parent_page
+  before_filter :get_templates
   layout "site"
   
   # GET /admin/sites/1/pages
@@ -104,5 +105,9 @@ class Admin::PagesController < ApplicationController
   private
     def get_parent_page
       @parent_page = params.include?(:page_id) ? @site.pages.find(params[:page_id]) : nil
+    end
+    
+    def get_templates
+      @templates = @site.templates.all
     end
 end

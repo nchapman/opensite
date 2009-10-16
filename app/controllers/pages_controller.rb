@@ -7,7 +7,7 @@ class PagesController < ApplicationController
       
       page = Page.find_by_url!(params[:path], @site)
 
-      template = @site.templates.all.first
+      template = page.get_template
       
       content = Parser.new(@site).parse_with_template(page, template)
       

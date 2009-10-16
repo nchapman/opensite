@@ -39,7 +39,7 @@ class Site < ActiveRecord::Base
   end
   
   def after_create
-    self.templates.create!(:name => "Default", :created_by => self.created_by, :updated_by => self.updated_by, :content => <<-CONTENT
+    template = self.templates.create!(:name => "Default", :created_by => self.created_by, :updated_by => self.updated_by, :content => <<-CONTENT
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
@@ -55,7 +55,7 @@ class Site < ActiveRecord::Base
     CONTENT
     )
 
-    page = self.pages.new(:title => "Welcome!", :home => true, :slug => "home", :created_by => self.created_by, :updated_by => self.updated_by)
+    page = self.pages.new(:title => "Welcome!", :home => true, :slug => "home", :created_by => self.created_by, :updated_by => self.updated_by, :template => template)
 
     page.parts << PagePart.new(:name => "body", :content => "We're so glad you stopped by.")
 

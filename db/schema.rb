@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091015055436) do
+ActiveRecord::Schema.define(:version => 20091016040118) do
 
   create_table "binary_assets", :force => true do |t|
     t.integer  "site_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20091015055436) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
+    t.integer  "template_id"
   end
 
   add_index "pages", ["lft", "rgt"], :name => "index_pages_on_lft_and_rgt"
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(:version => 20091015055436) do
   add_index "pages", ["site_id", "home"], :name => "index_pages_on_site_id_and_home"
   add_index "pages", ["site_id", "slug"], :name => "index_pages_on_site_id_and_slug"
   add_index "pages", ["site_id"], :name => "index_pages_on_site_id"
+  add_index "pages", ["template_id"], :name => "index_pages_on_template_id"
 
   create_table "sites", :force => true do |t|
     t.string   "name",          :null => false

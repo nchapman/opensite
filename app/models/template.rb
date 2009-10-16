@@ -2,6 +2,7 @@ class Template < ActiveRecord::Base
   belongs_to :site
   belongs_to :created_by, :class_name => "User"
   belongs_to :updated_by, :class_name => "User"
+  has_many :pages
   
   validates_presence_of :name, :content
   validates_uniqueness_of :name, :scope => [:site_id]

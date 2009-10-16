@@ -1,5 +1,6 @@
 class Page < ActiveRecord::Base
   belongs_to :site
+  belongs_to :template
   belongs_to :created_by, :class_name => "User"
   belongs_to :updated_by, :class_name => "User"
   has_many :parts, :class_name => "PagePart", :dependent => :destroy
@@ -62,6 +63,16 @@ class Page < ActiveRecord::Base
     else
       parts.find_by_name(name.to_s)
     end
+  end
+  
+  def get_template()
+    return self.template if self.template
+  
+    self.ancestors.reverse.each do |a|
+      return a.template if a.template 
+    end
+    
+    return nil
   end
   
   def self.prepare_global_context(context)

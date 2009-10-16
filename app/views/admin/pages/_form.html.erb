@@ -8,6 +8,10 @@
   <%= f.label :slug %><br />
   <%= f.text_field :slug %>
 </p>
+<p>
+  <%= f.label :template %><br />
+  <%= f.collection_select(:template_id, @templates, :id, :name, { :include_blank => "&lt;inherit&gt;" }) %>
+</p>
 <h3>Parts</h3>
 <div id="parts">
   <% f.fields_for :parts do |parts_form| %>

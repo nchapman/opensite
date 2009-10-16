@@ -5,6 +5,7 @@ class AddHomeToPages < ActiveRecord::Migration
   end
 
   def self.down
+    remove_index :pages, [:site_id, :home]
     remove_column :pages, :home
   end
 end
