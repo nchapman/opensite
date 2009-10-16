@@ -49,10 +49,10 @@ class Page < ActiveRecord::Base
   def url
     to_return = "/"
     
-    if self.home?
+    if self.root?
       return to_return
     else
-      self.ancestors.each {|a| to_return << a.slug << "/"} unless self.root?
+      self.ancestors.each {|a| to_return << a.slug << "/" unless a.root?}
       return to_return << self.slug << "/"
     end
   end

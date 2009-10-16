@@ -8,11 +8,7 @@ class Admin::PagesController < ApplicationController
   # GET /admin/sites/1/pages
   # GET /admin/sites/1/pages.xml
   def index
-    if @parent_page
-      @pages = @parent_page.children
-    else
-      @pages = @site.pages.roots
-    end
+    @pages = @parent_page.children
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,13 +47,9 @@ class Admin::PagesController < ApplicationController
   # POST /admin/sites/1/pages
   # POST /admin/sites/1/pages.xml
   def create
-    if @parent_page
-      @page = @parent_page.children.new(params[:page])
-      @page.site = @site
-    else
-      @page = @site.pages.new(params[:page])
-    end
+    @page = @parent_page.children.new(params[:page])
     
+    @page.site = @site
     @page.created_by = @page.updated_by = current_user
 
     respond_to do |format|
@@ -104,7 +96,7 @@ class Admin::PagesController < ApplicationController
   
   private
     def get_parent_page
-      @parent_page = params.include?(:page_id) ? @site.pages.find(params[:page_id]) : nil
+      @parent_page = params.include?(:page_id) ? @site.pages.find(params[:page_id]) : @site.pages.root
     end
     
     def get_templates

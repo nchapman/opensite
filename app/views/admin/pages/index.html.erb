@@ -1,31 +1,26 @@
 <% @page_title = "Listing pages" %>
 
-<% if @parent_page %>
 <p>
-  <%= link_to "Pages", admin_site_pages_path(@site) %> &#187;
   <% @parent_page.ancestors.each do |ancestor| %>
     <%= link_to ancestor.title, admin_site_page_children_path(@site, ancestor) %> &#187;
   <% end %>
-  <strong><%=h @parent_page.title %></strong>
+  <strong><%=h @parent_page.title %></strong> (<%= link_to "Edit", @parent_page.root? ? edit_admin_site_page_path(@site, @parent_page) : edit_admin_site_page_child_path(@site, @parent_page.parent, @parent_page) %>)
 </p>
-<% end %>
 
 <table>
   <tr>
     <th>Title</th>
-    <th>Children</th>
     <th>View</th>
-    <th>Show</th>
+    <!--th>Show</th-->
     <th>Edit</th>
     <th>Destroy</th>
   </tr>
 
 <% @pages.each do |page| %>
   <tr>
-    <td><%=h page.title %></td>
-    <td><%= link_to "Children", admin_site_page_children_path(@site, page) %></td>
+    <td><%= link_to h(page.title), admin_site_page_children_path(@site, page) %></td>
     <td><a href="<%= @site.url %><%= page.url %>" target="_blank">View</a>
-    <td><%= link_to "Show", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page) %></td>
+    <!--td><%= link_to "Show", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page) %></td-->
     <td><%= link_to "Edit", @parent_page ? edit_admin_site_page_child_path(@site, @parent_page, page) : edit_admin_site_page_path(@site, page) %></td>
     <td><%= link_to "Destroy", @parent_page ? admin_site_page_child_path(@site, @parent_page, page) : admin_site_page_path(@site, page), :confirm => "Are you sure?", :method => :delete %></td>
   </tr>
@@ -34,8 +29,4 @@
 
 <br />
 
-<% unless @parent_page %>
-  <%= link_to "New page", new_admin_site_page_path(@site) %>
-<% else %>
-  <%= link_to "New page", new_admin_site_page_child_path(@site, @parent_page) %>
-<% end %>
+<%= link_to "New page", new_admin_site_page_child_path(@site, @parent_page) %>
